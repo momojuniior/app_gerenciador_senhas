@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class AcessoController extends Controller
 {
+    /**
+     * Middleware implementado no método construtor
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -29,7 +32,7 @@ class AcessoController extends Controller
      */
     public function create()
     {
-        //
+        return view('acesso.create');
     }
 
     /**
@@ -40,7 +43,8 @@ class AcessoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $acesso = Acesso::create($request->all());
+        return redirect()->route('acesso.show', ['acesso' => $acesso->id]);
     }
 
     /**
@@ -51,7 +55,7 @@ class AcessoController extends Controller
      */
     public function show(Acesso $acesso)
     {
-        //
+        dd($acesso->getAttributes());
     }
 
     /**
