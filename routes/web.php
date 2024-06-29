@@ -17,8 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+    ->name('home')
+    ->middleware('verified');
 
-Route::resource('acesso', 'App\Http\Controllers\AcessoController');
+Route::resource('acesso', 'App\Http\Controllers\AcessoController')
+    ->middleware('verified');
